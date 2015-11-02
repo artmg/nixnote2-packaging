@@ -3,7 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: Randy Baumgarte <randy@fbn.cx>
 Build-Depends: libpoppler-qt4-dev, libopencv-dev, libhunspell-dev, libboost-dev, libboost-test-dev, libboost-program-options-dev, libevent-dev
-Standards-Version: 3.9.3
+Standards-Version: 3.9.5
 Homepage: https://github.com/baumgarr/Nixnote2
 
 Package: nixnote2
