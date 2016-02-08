@@ -21,12 +21,16 @@ include /usr/share/dpkg/default.mk
 %:
 	dh $@ 
 
-# debmake generated override targets
-# This is example for Cmake (See http://bugs.debian.org/641051 )
-#override_dh_auto_configure:
-#	dh_auto_configure -- \
-#	-DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH)
+override_dh_auto_build:
+	lupdate -pro NixNote2.pro -no-obsolete
+	lrelease NixNote2.pro
+	dh_auto_build
+	strip --strip-all nixnote2
 
-
-
-
+override_dh_auto_install:
+	dh_auto_install
+	mkdir debian/nixnote2/usr/share/nixnote2/spell
+	mkdir -p debian/nixnote2/usr/share/man/man1
+	cp man/nixnote2.1 debian/nixnote2/usr/share/man/man1/nixnote2.1
+	gzip -9 debian/nixnote2/usr/share/man/man1/nixnote2.1
+#	sed -i "s/__VERSION__/2.0-beta-4-0+git$(date +%Y%m%d)/" debian/nixnote2/usr/share/nixnote2/help/about.html
