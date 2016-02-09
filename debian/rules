@@ -33,4 +33,4 @@ override_dh_auto_install:
 	mkdir -p debian/nixnote2/usr/share/man/man1
 	cp man/nixnote2.1 debian/nixnote2/usr/share/man/man1/nixnote2.1
 	gzip -9 debian/nixnote2/usr/share/man/man1/nixnote2.1
-#	sed -i "s/__VERSION__/2.0-beta-4-0+git$(date +%Y%m%d)/" debian/nixnote2/usr/share/nixnote2/help/about.html
+	sed -i "s/__VERSION__/nixnote2-daily+git$(date +%Y%m%d)/" debian/nixnote2/usr/share/nixnote2/help/about.html
