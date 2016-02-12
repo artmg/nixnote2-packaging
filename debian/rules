@@ -26,7 +26,7 @@ override_dh_auto_build:
 	lrelease NixNote2.pro
 	dh_auto_build
 	strip --strip-all nixnote2
-	sed -i "s/__VERSION__/nixnote2-daily+$(date +%Y%m%d)/" debian/nixnote2/usr/share/nixnote2/help/about.html
+	sed -i "s/__VERSION__/nixnote2-daily+$(date +%Y%m%d)/" help/about.html
 
 override_dh_auto_install:
 	dh_auto_install
