@@ -23,9 +23,10 @@ export QT_SELECT = qt5
 %:
 	dh $@ 
 
-override_dh_installchangelogs:
-	# upstream changelog is in root above debian folder
-	dh_installchangelogs -k ../changelog.txt
+# cannot rely on getting changelog here as it must be copied by the recipe to determine {debversion}
+#override_dh_installchangelogs:
+#	# upstream changelog is in root above debian folder
+#	dh_installchangelogs -k ../changelog.txt
 
 override_dh_auto_build:
 	lupdate -pro NixNote2.pro -no-obsolete
