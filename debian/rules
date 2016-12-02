@@ -23,6 +23,9 @@ export QT_SELECT = qt5
 %:
 	dh $@ 
 
+#override_dh_installchangelogs:
+#	dh_installchangelogs -k ../changelog.txt
+
 override_dh_auto_build:
 	lupdate -pro NixNote2.pro -no-obsolete
 	lrelease NixNote2.pro
