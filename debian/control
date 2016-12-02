@@ -6,6 +6,7 @@ Build-Depends:
  debhelper (>= 9), 
  libpoppler-qt5-dev, 
  libqt5webkit5-dev, 
+ qttools5-dev-tools, 
  libopencv-dev, 
  libhunspell-dev, 
  libboost-all-dev, 
