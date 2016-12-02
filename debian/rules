@@ -16,6 +16,8 @@ include /usr/share/dpkg/default.mk
 # package maintainers to append LDFLAGS
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
+# Nixnote2 project now migrated to QT5 using plugins hierarchy
+export QT_SELECT = qt5
 
 # main packaging script based on dh7 syntax
 %:
@@ -26,6 +28,7 @@ override_dh_auto_build:
 	lrelease NixNote2.pro
 	dh_auto_build
 	strip --strip-all nixnote2
+	# embed the build date into the Help / About dialog to assist with tracking issues
 	sed -i "s/__VERSION__/nixnote2-daily+$(shell date +%Y%m%d)/" help/about.html
 
 override_dh_auto_install:
