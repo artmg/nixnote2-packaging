@@ -30,11 +30,6 @@ Depends:
  libhunspell-1.3-0 | libhunspell-1.4-0, 
  libpoppler-qt5-1, 
  libqt5webkit5, 
- libqt5-sql, 
- libqt5-sql-sqlite, 
- libqt5-xml, 
- libqt5gui5, 
- libqt5-network, 
  libpng12-0 | libpng16-16, 
  libpoppler28 | libpoppler43 | libpoppler44 | libpoppler46 | libpoppler49 | libpoppler52 | libpoppler58 | libpoppler61, 
  libsqlite3-0, 
@@ -48,7 +43,10 @@ Depends:
  libopencv-core2.4 | libopencv-core2.4v5, 
  libopencv-highgui2.4 | libopencv-highgui2.4v5 | libopencv-highgui2.4-deb0, 
  libcurl3
-Recommends: mimetex, libreoffice-common, openjdk-7-jre | openjdk-7-jdk | openjdk-8-jre | openjdk-8-jdk | sun-java7-jdk | sun-java7-jre | java7-sdk | java7-runtime | default-jre 
+Recommends: 
+ mimetex, 
+ libreoffice-common, 
+ openjdk-7-jre | openjdk-7-jdk | openjdk-8-jre | openjdk-8-jdk | sun-java7-jdk | sun-java7-jre | java7-sdk | java7-runtime | default-jre 
 Description: Open Source Evernote client.
  NixNote is a client for the Evernote service (www.evernote.com).  It
  will allow synchronization and editing of notes from your local
