@@ -1,4 +1,4 @@
-NixNote (2.0) stable; urgency=low
+NixNote (2.0-release) stable; urgency=low
   * Added the ability to export a note as a PDF.
   * Added the ability to alter the default notebook.
   * Added a new material theme.
