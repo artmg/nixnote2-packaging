@@ -1,44 +1,64 @@
 #!/usr/bin/make -f
 # See debhelper(7) (uncomment to enable)
 # output every command that modifies files on the build system.
-#DH_VERBOSE = 1
-
-# see EXAMPLES in dpkg-buildflags(1) and read /usr/share/dpkg/*
-DPKG_EXPORT_BUILDFLAGS = 1
-include /usr/share/dpkg/default.mk
+#export DH_VERBOSE = 1
 
 # see FEATURE AREAS in dpkg-buildflags(1)
-#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+export QT_SELECT = 5
 
-# see ENVIRONMENT in dpkg-buildflags(1)
-# package maintainers to append CFLAGS
-#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
-# package maintainers to append LDFLAGS
-#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
-
-# Nixnote2 project now migrated to QT5 using plugins hierarchy
-export QT_SELECT = qt5
+_DEBIAN_VERSION=$(shell dpkg-parsechangelog | grep '^Version: .*' | grep -o ' .*' | grep -o '[0-9].*')
+_VERSION=$(shell echo $(_DEBIAN_VERSION) | cut -d- -f 1)
+_PKGNAME=$(shell dpkg-parsechangelog | head -n 1 | cut -d ' ' -f 2)
+JAVA_HOME=/usr/lib/jvm/default-java
+CLASSPATH=.
 
 # main packaging script based on dh7 syntax
 %:
-	dh $@ 
+	dh $@ --with javahelper
 
-# cannot rely on getting changelog here as it must be copied by the recipe to determine {debversion}
-#override_dh_installchangelogs:
-#	# upstream changelog is in root above debian folder
-#	dh_installchangelogs -k ../changelog.txt
-
+# update translation files before build
 override_dh_auto_build:
-	lupdate -pro NixNote2.pro -no-obsolete
+#	lupdate -pro NixNote2.pro -no-obsolete
 	lrelease NixNote2.pro
 	dh_auto_build
 	strip --strip-all nixnote2
 	# embed the build date into the Help / About dialog to assist with tracking issues
 	sed -i "s/__VERSION__/nixnote2-daily+$(shell date +%Y%m%d)/" help/about.html
 
+# build java jar file from source, discard upstream jar file
+override_jh_build:
+	jh_build -N --main=cx.fbn.encrypt.Crypto --javacopts="-source 1.6 -target 1.6"
+
+
+# cannot rely on getting changelog here as it must be copied by the recipe to determine {debversion}
+#override_dh_installchangelogs:
+#	# upstream changelog is in root above debian folder
+#	dh_installchangelogs -k ../changelog.txt
+
+# handle changelog.txt manually since dh_installchangelogs won't do
+# that automatically
+override_dh_installchangelogs:
+	dh_installchangelogs changelog.txt
+
+override_dh_clean:
+	dh_clean install translations/*.qm
+
+# pdf document really don't need compression
+override_dh_compress:
+	dh_compress -X.pdf
+
+# upstream qmake instruction is really poor,
+# handle install manually using *.install file
 override_dh_auto_install:
-	dh_auto_install
-	mkdir debian/nixnote2/usr/share/nixnote2/spell
-	mkdir -p debian/nixnote2/usr/share/man/man1
-	cp man/nixnote2.1 debian/nixnote2/usr/share/man/man1/nixnote2.1
-	gzip -9 debian/nixnote2/usr/share/man/man1/nixnote2.1
+
+# never install ts translation file
+override_dh_install:
+	dh_install -X*.ts
+
+# replace __VERSION__ placeholder with source version name
+override_dh_installdocs:
+	dh_installdocs
+
+#find debian/$(_PKGNAME)/ -type f -exec sed -i 's/__VERSION__/$(_VERSION)/g' {} + || true
