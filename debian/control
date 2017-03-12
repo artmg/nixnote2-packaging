@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Boyuan Yang <073plan@gmail.com>
 Build-Depends:
- debhelper (>= 10),
+ debhelper (>= 9),
  default-jdk,
  javahelper,
  libavcodec-dev,
