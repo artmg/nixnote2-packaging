@@ -14,6 +14,7 @@ Build-Depends:
  libpoppler-qt5-dev,
  libqt5webkit5-dev,
  libswscale-dev,
+ libtidy-dev,
  qt5-qmake,
  qtbase5-dev,
  qttools5-dev-tools,
