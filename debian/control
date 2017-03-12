@@ -15,7 +15,6 @@ Build-Depends:
  libqt5webkit5-dev,
  libswscale-dev,
  qt5-qmake,
- qt5qevercloud-dev,
  qtbase5-dev,
  qttools5-dev-tools,
 Standards-Version: 3.9.8
