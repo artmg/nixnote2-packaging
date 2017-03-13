@@ -23,7 +23,8 @@ override_dh_auto_build:
 #	lupdate -pro NixNote2.pro -no-obsolete
 	lrelease NixNote2.pro
 	dh_auto_build
-	strip --strip-all nixnote2
+	# remove strip on RFE - https://github.com/artmg/nixnote2-packaging/issues/26
+	#strip --strip-all nixnote2
 	# embed the build date into the Help / About dialog to assist with tracking issues
 	sed -i "s/__VERSION__/nixnote2-daily+$(shell date +%Y%m%d)/" help/about.html
 
@@ -49,9 +50,17 @@ override_dh_clean:
 override_dh_compress:
 	dh_compress -X.pdf
 
-# upstream qmake instruction is really poor,
-# handle install manually using *.install file
+## upstream qmake instruction is really poor,
+## handle install manually using *.install file
+#override_dh_auto_install:
+
+# reinstate previous install code
 override_dh_auto_install:
+	dh_auto_install
+	mkdir debian/nixnote2/usr/share/nixnote2/spell
+	mkdir -p debian/nixnote2/usr/share/man/man1
+	cp man/nixnote2.1 debian/nixnote2/usr/share/man/man1/nixnote2.1
+	gzip -9 debian/nixnote2/usr/share/man/man1/nixnote2.1
 
 # never install ts translation file
 override_dh_install:
