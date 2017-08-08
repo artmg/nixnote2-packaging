@@ -61,6 +61,12 @@ override_dh_auto_install:
 	mkdir -p debian/nixnote2/usr/share/man/man1
 	cp man/nixnote2.1 debian/nixnote2/usr/share/man/man1/nixnote2.1
 	gzip -9 debian/nixnote2/usr/share/man/man1/nixnote2.1
+	# when making the 'Makefile.Release install' this Install Extra from project file
+	# does not prepend the images folder with <<PKGBUILDDIR>>
+	# pixmap.extra = cp images/windowIcon.png images/nixnote2.png
+	# so do the copy manually here
+	mkdir -p debian/nixnote2/usr/share/pixmaps
+	cp images/windowIcon.png debian/nixnote2/usr/share/pixmaps/nixnote2.png
 
 # never install ts translation file
 override_dh_install:
