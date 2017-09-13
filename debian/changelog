@@ -1,4 +1,34 @@
-NixNote (2.0-release) stable; urgency=low
+NixNote (2.0.2) stable; urgency=low
+  * Added the ability to code user exit routines.
+  * Added <pre> opton to enter pre-formatted text.
+  * Changed UTF-8 encoding to be the default option.
+  * Better C++11 compatibility.                    
+  * Bug fixes.
+ -- Randy Baumgarte <randy@fbn.cx>  Tue, 12 Sep 2017 12:00:00 -0400
+
+
+NixNote (2.0.1) stable; urgency=low
+  * Add the ability to customize some aspects of a table
+    within a note.
+  * Added an auto-save interval. This can be customized 
+    in the preferences dialog.
+  * Add the ability to fully justify text.
+  * Add "double click" tray option. May not work on all
+    Window managers & isn't recommended with the 
+    "single click" option.
+  * Add the ability to specify the db location via a 
+    --condigDir command line option.
+  * Add option to intercept SIGHUP on Linux.
+  * Add option to clear & mark complete multiple reminders
+    from the note list.
+  * Added support for reminder search syntax & attribute filters. 
+  * Add support for new plugin locations.
+  * Chinese translation improvements.
+  * Performance improvements & Bug fixes.
+ -- Randy Baumgarte <randy@fbn.cx>  Thu, 9 Mar 2017 12:00:00 -0400
+
+
+NixNote (2.0) stable; urgency=low
   * Added the ability to export a note as a PDF.
   * Added the ability to alter the default notebook.
   * Added a new material theme.
@@ -133,4 +163,4 @@ NixNote (2.0-beta-3) stable; urgency=low
 
 NixNote (2.0-beta-2) stable; urgency=low
   * Beta 2.  Lots of bug fixes and removal of Thrift.
- -- Randy Baumgarte <randy@fbn.cx>  Sat, 26 Apr 2014 14:00:00 -0400
+-- Randy Baumgarte <randy@fbn.cx> Sat, 26 Apr 2014 14:00:00 -0400
